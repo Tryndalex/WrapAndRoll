@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wrap & Roll — Vietnamese Kitchen, Helsinki</title>
+<meta name="description" content="Wrap & Roll — Authentic Vietnamese street food kitchen in Helsinki, Finland. Pho, spring rolls, rice noodle bowls and wok dishes made fresh daily.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rice-paper:#f7f2e9;
+    --rice-paper-2:#efe7d8;
+    --nordic-white:#faf8f4;
+    --oak:#c9a97e;
+    --driftwood:#a89681;
+    --lacquer-red:#a3231f;
+    --lacquer-red-dark:#7c1a17;
+    --saffron:#d99a3d;
+    --ink:#241c17;
+    --ink-soft:#4a3f35;
+    --herb-green:#5c6e4f;
+    --line:rgba(36,28,23,0.12);
+    --shadow-soft: 0 20px 60px rgba(36,28,23,0.12);
+    --ff-display:'Fraunces', serif;
+    --ff-body:'Manrope', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--ff-body);
+    background:var(--nordic-white);
+    color:var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  .accent{color:var(--lacquer-red);}
+  .eyebrow{
+    font-family:var(--ff-body);
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:700;
+    color:var(--lacquer-red);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--lacquer-red);
+  }
+  h1,h2,h3,h4{font-family:var(--ff-display);font-weight:600;line-height:1.05;color:var(--ink);}
+  section{position:relative;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    padding:22px 0;
+    transition:all .4s ease;
+    background:transparent;
+  }
+  header.scrolled{
+    background:rgba(250,248,244,0.92);
+    backdrop-filter:blur(14px);
+    box-shadow:0 1px 0 var(--line);
+    padding:14px 0;
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    max-width:1240px;margin:0 auto;padding:0 32px;
+  }
+  .logo{
+    font-family:var(--ff-display);
+    font-size:22px;font-weight:700;
+    display:flex;align-items:center;gap:10px;
+    color:var(--nordic-white);
+    transition:color .4s ease;
+  }
+  header.scrolled .logo{color:var(--ink);}
+  .logo svg{width:30px;height:30px;}
+  .nav-links{display:flex;gap:38px;align-items:center;}
+  .nav-links a{
+    font-size:14px;font-weight:600;color:var(--nordic-white);
+    position:relative;padding-bottom:4px;transition:color .4s ease;
+  }
+  header.scrolled .nav-links a{color:var(--ink-soft);}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1.5px;
+    background:var(--lacquer-red);transition:width .3s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--lacquer-red);color:#fff !important;
+    padding:11px 24px;border-radius:100px;font-size:13px;font-weight:700;
+    letter-spacing:0.03em;
+  }
+  .nav-cta:hover{background:var(--lacquer-red-dark);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;}
+  .burger span{width:26px;height:2px;background:var(--nordic-white);transition:.3s;}
+  header.scrolled .burger span{background:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100vh;min-height:680px;position:relative;
+    display:flex;align-items:center;
+    background:linear-gradient(180deg, rgba(20,14,10,0.35) 0%, rgba(20,14,10,0.55) 60%, rgba(20,14,10,0.85) 100%),
+      url('https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 20%, rgba(217,154,61,0.18), transparent 45%);
+    pointer-events:none;
+  }
+  .hero-content{position:relative;z-index:2;color:#fff;max-width:760px;}
+  .hero .eyebrow{color:var(--saffron);}
+  .hero .eyebrow::before{background:var(--saffron);}
+  .hero h1{
+    font-size:clamp(48px,7.5vw,96px);
+    color:#fff;margin:18px 0 22px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{font-style:italic;color:var(--saffron);font-weight:400;}
+  .hero p{
+    font-size:18px;line-height:1.7;color:rgba(255,255,255,0.86);
+    max-width:520px;margin-bottom:36px;font-weight:300;
+  }
+  .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 32px;border-radius:100px;
+    font-size:14px;font-weight:700;letter-spacing:0.02em;
+    transition:all .3s ease;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--lacquer-red);color:#fff;}
+  .btn-primary:hover{background:var(--lacquer-red-dark);transform:translateY(-2px);}
+  .btn-outline{border:1.5px solid rgba(255,255,255,0.5);color:#fff;background:transparent;}
+  .btn-outline:hover{background:rgba(255,255,255,0.12);border-color:#fff;}
+
+  .hero-scroll{
+    position:absolute;bottom:38px;left:32px;z-index:2;
+    display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.7);
+    font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+  }
+  .scroll-line{width:1px;height:44px;background:rgba(255,255,255,0.4);position:relative;overflow:hidden;}
+  .scroll-line::after{
+    content:'';position:absolute;top:0;left:0;width:100%;height:14px;
+    background:var(--saffron);animation:scrollmove 2s ease-in-out infinite;
+  }
+  @keyframes scrollmove{0%{top:-14px;}100%{top:44px;}}
+
+  .hero-tag{
+    position:absolute;top:130px;right:6%;z-index:2;
+    writing-mode:vertical-rl;color:rgba(255,255,255,0.5);
+    font-size:12px;letter-spacing:0.3em;text-transform:uppercase;
+    display:none;
+  }
+  @media(min-width:1000px){.hero-tag{display:block;}}
+
+  /* ---------- INTRO / STORY ---------- */
+  .story{
+    padding:140px 0;background:var(--rice-paper);position:relative;
+  }
+  .story-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  }
+  .story h2{font-size:clamp(34px,4vw,52px);margin:18px 0 26px;}
+  .story h2 em{color:var(--lacquer-red);font-style:italic;font-weight:400;}
+  .story p{font-size:16.5px;line-height:1.8;color:var(--ink-soft);margin-bottom:18px;font-weight:400;}
+  .story-visual{position:relative;border-radius:6px;overflow:hidden;}
+  .story-visual img{width:100%;height:560px;object-fit:cover;transition:transform .6s ease;}
+  .story-visual:hover img{transform:scale(1.04);}
+  .story-badge{
+    position:absolute;bottom:-1px;right:-1px;
+    background:var(--nordic-white);padding:26px 30px;
+    border-top-left-radius:6px;
+    box-shadow:var(--shadow-soft);
+    max-width:230px;
+  }
+  .story-badge .num{font-family:var(--ff-display);font-size:40px;color:var(--lacquer-red);font-weight:700;line-height:1;}
+  .story-badge .lbl{font-size:12px;color:var(--ink-soft);letter-spacing:0.05em;margin-top:6px;text-transform:uppercase;}
+
+  .stat-row{display:flex;gap:48px;margin-top:44px;flex-wrap:wrap;}
+  .stat-row div{border-left:2px solid var(--oak);padding-left:16px;}
+  .stat-row .stat-num{font-family:var(--ff-display);font-size:30px;font-weight:600;color:var(--ink);}
+  .stat-row .stat-lbl{font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;}
+
+  /* ---------- PILLARS ---------- */
+  .pillars{background:var(--ink);padding:110px 0;color:var(--nordic-white);}
+  .pillars-head{max-width:600px;margin-bottom:70px;}
+  .pillars .eyebrow{color:var(--saffron);}
+  .pillars .eyebrow::before{background:var(--saffron);}
+  .pillars h2{color:#fff;font-size:clamp(32px,4vw,46px);margin-top:16px;}
+  .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.08);}
+  .pillar{background:var(--ink);padding:48px 40px;transition:.4s;}
+  .pillar:hover{background:#332720;}
+  .pillar .pnum{font-family:var(--ff-display);font-size:14px;color:var(--saffron);letter-spacing:0.1em;}
+  .pillar h3{color:#fff;font-size:24px;margin:20px 0 14px;font-weight:500;}
+  .pillar p{color:rgba(255,255,255,0.65);font-size:14.5px;line-height:1.75;font-weight:300;}
+
+  /* ---------- MENU ---------- */
+  .menu{padding:140px 0 100px;background:var(--nordic-white);}
+  .menu-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:70px;gap:40px;flex-wrap:wrap;
+  }
+  .menu-head h2{font-size:clamp(36px,4.4vw,58px);margin-top:16px;max-width:560px;}
+  .menu-head p{max-width:340px;color:var(--ink-soft);font-size:15px;line-height:1.7;}
+
+  .menu-filters{
+    display:flex;gap:10px;margin-bottom:56px;flex-wrap:wrap;
+  }
+  .filter-btn{
+    padding:11px 22px;border-radius:100px;border:1.5px solid var(--line);
+    font-size:13px;font-weight:600;color:var(--ink-soft);background:transparent;
+    cursor:pointer;transition:.25s;
+  }
+  .filter-btn.active, .filter-btn:hover{
+    background:var(--lacquer-red);color:#fff;border-color:var(--lacquer-red);
+  }
+
+  .menu-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
+  }
+  .dish-card{
+    background:var(--rice-paper);border-radius:8px;overflow:hidden;
+    box-shadow:0 8px 24px rgba(36,28,23,0.06);
+    transition:transform .4s ease, box-shadow .4s ease;
+    display:flex;flex-direction:column;
+  }
+  .dish-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft);}
+  .dish-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--rice-paper-2);}
+  .dish-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .dish-card:hover .dish-media img{transform:scale(1.08);}
+  .dish-tag{
+    position:absolute;top:14px;left:14px;background:rgba(250,248,244,0.92);
+    padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;
+    letter-spacing:0.05em;text-transform:uppercase;color:var(--lacquer-red);
+  }
+  .dish-body{padding:24px 24px 28px;flex:1;display:flex;flex-direction:column;}
+  .dish-body h3{font-size:19px;font-weight:500;margin-bottom:8px;color:var(--ink);line-height:1.3;}
+  .dish-fi{font-size:12px;color:var(--driftwood);font-style:italic;margin-bottom:12px;}
+  .dish-body p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;flex:1;margin-bottom:14px;}
+  .dish-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
+  .dish-price{font-family:var(--ff-display);font-size:19px;font-weight:600;color:var(--lacquer-red);}
+  .dish-cat{font-size:11px;color:var(--herb-green);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;}
+
+  /* ---------- GALLERY / AMBIENCE ---------- */
+  .ambience{padding:0;position:relative;background:var(--ink);}
+  .ambience-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:280px 280px;}
+  .ambience-item{position:relative;overflow:hidden;}
+  .ambience-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;filter:saturate(1.05);}
+  .ambience-item:hover img{transform:scale(1.08);}
+  .ambience-item.tall{grid-row:span 2;}
+  .ambience-caption{
+    position:absolute;bottom:0;left:0;right:0;padding:24px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.65));
+    color:#fff;font-size:13px;font-weight:600;letter-spacing:0.03em;
+  }
+
+  /* ---------- FINLAND CONNECTION ---------- */
+  .fusion{
+    padding:130px 0;background:var(--rice-paper-2);
+    position:relative;overflow:hidden;
+  }
+  .fusion::before{
+    content:'';position:absolute;top:-60px;right:-60px;width:340px;height:340px;
+    border-radius:50%;background:radial-gradient(circle, rgba(163,35,31,0.06), transparent 70%);
+  }
+  .fusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .fusion-visual img{width:100%;height:460px;object-fit:cover;border-radius:6px;}
+  .fusion h2{font-size:clamp(32px,4vw,48px);margin:18px 0 24px;}
+  .fusion p{color:var(--ink-soft);font-size:16px;line-height:1.8;margin-bottom:16px;}
+  .fusion-tags{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;}
+  .fusion-tag{
+    padding:9px 18px;background:var(--nordic-white);border:1px solid var(--line);
+    border-radius:100px;font-size:12.5px;font-weight:600;color:var(--ink-soft);
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .reviews{padding:110px 0;background:var(--nordic-white);}
+  .reviews-head{text-align:center;max-width:600px;margin:0 auto 60px;}
+  .reviews-head h2{font-size:clamp(30px,4vw,44px);margin-top:16px;}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .review-card{
+    background:var(--rice-paper);padding:36px 30px;border-radius:8px;
+    border:1px solid var(--line);
+  }
+  .review-stars{color:var(--saffron);font-size:15px;margin-bottom:16px;letter-spacing:2px;}
+  .review-card p{font-size:14.5px;line-height:1.75;color:var(--ink-soft);margin-bottom:22px;font-style:italic;}
+  .review-name{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .review-loc{font-size:12px;color:var(--driftwood);margin-top:2px;}
+
+  /* ---------- VISIT / CONTACT ---------- */
+  .visit{
+    padding:130px 0;
+    background:linear-gradient(160deg, var(--ink) 0%, #2e2117 100%);
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .visit::after{
+    content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;
+    border-radius:50%;background:radial-gradient(circle, rgba(217,154,61,0.1), transparent 70%);
+  }
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;position:relative;z-index:2;}
+  .visit .eyebrow{color:var(--saffron);}
+  .visit .eyebrow::before{background:var(--saffron);}
+  .visit h2{color:#fff;font-size:clamp(34px,4.4vw,54px);margin:18px 0 30px;}
+  .visit-info{display:flex;flex-direction:column;gap:26px;margin-top:36px;}
+  .info-item{display:flex;gap:18px;align-items:flex-start;}
+  .info-icon{
+    width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    border:1px solid rgba(255,255,255,0.15);
+  }
+  .info-item h4{color:#fff;font-size:15px;font-weight:600;margin-bottom:4px;font-family:var(--ff-body);}
+  .info-item p{color:rgba(255,255,255,0.65);font-size:14px;line-height:1.6;font-weight:300;}
+  .map-frame{
+    border-radius:8px;overflow:hidden;height:100%;min-height:420px;
+    border:1px solid rgba(255,255,255,0.12);position:relative;
+  }
+  .map-frame iframe{width:100%;height:100%;border:0;filter:grayscale(0.3) contrast(1.1);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);padding:60px 0 30px;color:rgba(255,255,255,0.55);}
+  .footer-grid{
+    display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;
+    padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-logo{
+    font-family:var(--ff-display);font-size:24px;color:#fff;font-weight:700;margin-bottom:14px;
+  }
+  .footer-grid p{font-size:13.5px;line-height:1.7;max-width:280px;}
+  .footer-col h5{color:#fff;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;}
+  .footer-col a{display:block;font-size:13.5px;margin-bottom:10px;color:rgba(255,255,255,0.55);transition:.2s;}
+  .footer-col a:hover{color:var(--saffron);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;padding-top:26px;font-size:12.5px;
+    flex-wrap:wrap;gap:10px;
+  }
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .story-grid, .fusion-grid, .visit-grid{grid-template-columns:1fr;gap:44px;}
+    .story-visual img{height:400px;}
+    .pillars-grid{grid-template-columns:1fr;}
+    .menu-grid{grid-template-columns:repeat(2,1fr);}
+    .reviews-grid{grid-template-columns:1fr;}
+    .ambience-grid{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px 220px;}
+    .ambience-item.tall{grid-row:span 1;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:680px){
+    .wrap{padding:0 20px;}
+    nav{padding:0 20px;}
+    .nav-links{
+      position:fixed;top:0;right:-100%;height:100vh;width:78%;
+      background:var(--nordic-white);flex-direction:column;justify-content:center;
+      transition:right .4s ease;box-shadow:-10px 0 40px rgba(0,0,0,0.15);
+    }
+    .nav-links.open{right:0;}
+    .nav-links a{color:var(--ink) !important;font-size:17px;}
+    .burger{display:flex;}
+    .hero h1{font-size:clamp(38px,10vw,56px);}
+    .hero p{font-size:16px;}
+    .story, .pillars, .menu, .fusion, .reviews, .visit{padding:80px 0;}
+    .menu-grid{grid-template-columns:1fr;}
+    .ambience-grid{grid-template-columns:1fr;grid-template-rows:repeat(5,220px);}
+    .footer-grid{grid-template-columns:1fr;gap:30px;}
+    .stat-row{gap:28px;}
+    .menu-head{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="logo">
+      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.3"/><path d="M10 22c2-6 6-9 10-9s8 3 10 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M13 22h14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Wrap & Roll
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#ambience">Ambience</a>
+      <a href="#fusion">Two Worlds</a>
+      <a href="#visit">Visit</a>
+      <a href="#visit" class="nav-cta">Reserve a Table</a>
+    </div>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-tag">Helsinki &mdash; Est. 2019</div>
+  <div class="wrap hero-content">
+    <span class="eyebrow">Vietnamese Kitchen &middot; Helsinki</span>
+    <h1>Broth simmered<br>for <em>hours,</em><br>served in minutes.</h1>
+    <p>Street food from Hanoi and Saigon, rolled, wokked and ladled fresh every day &mdash; brought to Finland's quiet north with warmth, rice paper and steam.</p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn btn-primary">View the Menu</a>
+      <a href="#visit" class="btn btn-outline">Find Us in Helsinki</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="reveal">
+        <span class="eyebrow">Our Story</span>
+        <h2>Two homelands,<br>one <em>table.</em></h2>
+        <p>Wrap & Roll began with a simple idea: the fragrant, herb-laden street food of Vietnam deserves a home in the calm, forested quiet of Finland. Our founders grew up between Hanoi's morning pho stalls and Helsinki's winter mornings &mdash; and built a kitchen that honours both.</p>
+        <p>Every broth is simmered for at least twelve hours with charred ginger, star anise and roasted bones. Every roll is wrapped by hand. And every dish is plated with the same restraint and clarity you'll find in Nordic design &mdash; nothing extra, everything essential.</p>
+        <div class="stat-row">
+          <div><div class="stat-num">12h+</div><div class="stat-lbl">Broth Simmer Time</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-lbl">Made Fresh Daily</div></div>
+          <div><div class="stat-num">15</div><div class="stat-lbl">Signature Dishes</div></div>
+        </div>
+      </div>
+      <div class="story-visual reveal">
+        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=1200&auto=format&fit=crop" alt="Vietnamese pho broth being prepared" loading="lazy">
+        <div class="story-badge">
+          <div class="num">2019</div>
+          <div class="lbl">Founded in Helsinki</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="wrap">
+    <div class="pillars-head reveal">
+      <span class="eyebrow">What Guides Us</span>
+      <h2>Vietnamese soul,<br>Nordic hand.</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <div class="pnum">01</div>
+        <h3>Slow Broth</h3>
+        <p>Bones roasted, charred and simmered for half a day &mdash; the same patient method used on the streets of Hanoi, unchanged for generations.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pnum">02</div>
+        <h3>Local Sourcing</h3>
+        <p>Herbs grown in Finnish greenhouses, vegetables from nearby farms, and rice paper imported directly from the Mekong Delta.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pnum">03</div>
+        <h3>Quiet Design</h3>
+        <p>A dining room built on light wood, linen tones and warm lanterns &mdash; where Scandinavian calm meets Vietnamese colour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <div>
+        <span class="eyebrow">Signature Dishes</span>
+        <h2>Rolled, wokked<br>&amp; ladled fresh.</h2>
+      </div>
+      <p>Fifteen dishes built around four pillars of Vietnamese street food: pho, spring rolls, rice noodle bowls and wok classics.</p>
+    </div>
+
+    <div class="menu-filters reveal">
+      <button class="filter-btn active" data-filter="all">All Dishes</button>
+      <button class="filter-btn" data-filter="pho">Pho</button>
+      <button class="filter-btn" data-filter="roll">Spring Rolls</button>
+      <button class="filter-btn" data-filter="salad">Rice Noodle Salad</button>
+      <button class="filter-btn" data-filter="wok">Wok</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+
+      <div class="dish-card reveal" data-cat="pho">
+        <div class="dish-media"><img src="images/VietnamilainenNuudelikeittoPhoKana_Wrap_Roll.jpg" alt="Chicken Pho" loading="lazy"><span class="dish-tag">Pho</span></div>
+        <div class="dish-body">
+          <h3>Chicken Pho</h3>
+          <div class="dish-fi">Kana Pho</div>
+          <p>Twelve-hour chicken bone broth with charred ginger and star anise, rice noodles, spring onion and fresh Thai basil.</p>
+          <div class="dish-foot"><span class="dish-price">14,90&nbsp;€</span><span class="dish-cat">Broth Bowl</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="pho">
+        <div class="dish-media"><img src="images/VietnamilainenNuudelikeittoPhoNaudanliha_Wrap_Roll.jpg" alt="Beef Pho" loading="lazy"><span class="dish-tag">Pho</span></div>
+        <div class="dish-body">
+          <h3>Beef Pho</h3>
+          <div class="dish-fi">Naudanliha Pho</div>
+          <p>Slow-simmered beef bone broth, tender brisket, rice noodles and a plate of fresh herbs for the table.</p>
+          <div class="dish-foot"><span class="dish-price">15,90&nbsp;€</span><span class="dish-cat">Broth Bowl</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="pho">
+        <div class="dish-media"><img src="images/VietnamilainenNuudelikeittoPhoTofuJaSieni_Wrap_Roll.jpg" alt="Vegetable Pho" loading="lazy"><span class="dish-tag">Pho</span></div>
+        <div class="dish-body">
+          <h3>Vegetable Pho</h3>
+          <div class="dish-fi">Kasvis Pho</div>
+          <p>A clean vegetable and star anise broth with rice noodles, tofu, seasonal greens and lime.</p>
+          <div class="dish-foot"><span class="dish-price">13,90&nbsp;€</span><span class="dish-cat">Broth Bowl</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="roll">
+        <div class="dish-media"><img src="images/LihaKesärulla_Wrap_Roll.jpg" alt="Meat Spring Rolls" loading="lazy"><span class="dish-tag">Spring Roll</span></div>
+        <div class="dish-body">
+          <h3>Meat Spring Rolls</h3>
+          <div class="dish-fi">Liha Kesärulla</div>
+          <p>Hand-rolled rice paper filled with pork, rice vermicelli, herbs and lettuce, served with a peanut dip.</p>
+          <div class="dish-foot"><span class="dish-price">9,50&nbsp;€</span><span class="dish-cat">Fresh Roll</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="roll">
+        <div class="dish-media"><img src="images/VietnamilaisetKasvisKevätkääryleet_Wrap_Roll.jpg" alt="Vegetable Spring Rolls" loading="lazy"><span class="dish-tag">Spring Roll</span></div>
+        <div class="dish-body">
+          <h3>Vegetable Spring Rolls</h3>
+          <div class="dish-fi">Kasvis Kevätkääryle</div>
+          <p>Crisp fried rolls with cabbage, carrot and glass noodles, served with sweet chili dipping sauce.</p>
+          <div class="dish-foot"><span class="dish-price">8,50&nbsp;€</span><span class="dish-cat">Fried Roll</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="roll">
+        <div class="dish-media"><img src="images/KasvisKesärullaJaMaapähkinäkastike_Wrap_Roll.jpg" alt="Vegetable Fresh Rolls with Peanut Sauce" loading="lazy"><span class="dish-tag">Spring Roll</span></div>
+        <div class="dish-body">
+          <h3>Vegetable Fresh Rolls, Peanut Sauce</h3>
+          <div class="dish-fi">Kasvis Kesärulla ja Maapähkinäkastike</div>
+          <p>Rice paper rolls with crunchy vegetables and herbs, served with a rich house-made peanut sauce.</p>
+          <div class="dish-foot"><span class="dish-price">9,50&nbsp;€</span><span class="dish-cat">Fresh Roll</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="salad">
+        <div class="dish-media"><img src="images/KanaRiisinuudelisalaatti_Wrap_Roll.jpg" alt="Chicken Rice Noodle Salad" loading="lazy"><span class="dish-tag">Rice Noodle</span></div>
+        <div class="dish-body">
+          <h3>Chicken Rice Noodle Salad</h3>
+          <div class="dish-fi">Kana Riisinuudelisalaatti</div>
+          <p>Cold rice vermicelli with grilled chicken, pickled carrot, cucumber, herbs and a citrus fish sauce dressing.</p>
+          <div class="dish-foot"><span class="dish-price">14,50&nbsp;€</span><span class="dish-cat">Noodle Salad</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="salad">
+        <div class="dish-media"><img src="images/JättikatkarapuRiisinuudelisalaatti_Wrap_Roll.jpg" alt="King Prawn Rice Noodle Salad" loading="lazy"><span class="dish-tag">Rice Noodle</span></div>
+        <div class="dish-body">
+          <h3>King Prawn Rice Noodle Salad</h3>
+          <div class="dish-fi">Jättikatkarapu Riisinuudelisalaatti</div>
+          <p>Grilled king prawns over cold rice noodles with fresh herbs, roasted peanuts and a tangy nuoc cham dressing.</p>
+          <div class="dish-foot"><span class="dish-price">16,90&nbsp;€</span><span class="dish-cat">Noodle Salad</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="salad">
+        <div class="dish-media"><img src="images/VegetarianSaigonSpecialRiisinuudelisalaatti_Wrap_Roll.jpg" alt="Vegetable Tofu and Spring Roll Rice Noodle Salad" loading="lazy"><span class="dish-tag">Rice Noodle</span></div>
+        <div class="dish-body">
+          <h3>Tofu &amp; Spring Roll Noodle Salad</h3>
+          <div class="dish-fi">Kasvis Tofu ja Kevätkääryle Riisinuudelisalaatti</div>
+          <p>Crispy tofu and fried spring roll pieces over rice vermicelli, fresh herbs and pickled vegetables.</p>
+          <div class="dish-foot"><span class="dish-price">14,50&nbsp;€</span><span class="dish-cat">Noodle Salad</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="wok">
+        <div class="dish-media"><img src="images/JättikatkarapuRiisinuudeliWok_Wrap_Roll.jpg" alt="King Prawn Rice Noodle Wok" loading="lazy"><span class="dish-tag">Wok</span></div>
+        <div class="dish-body">
+          <h3>King Prawn Noodle Wok</h3>
+          <div class="dish-fi">Jättikatkarapu Riisinuudeli Wok</div>
+          <p>Wok-tossed king prawns with rice noodles, egg, bean sprouts and spring onion in a smoky pad-style sauce.</p>
+          <div class="dish-foot"><span class="dish-price">17,50&nbsp;€</span><span class="dish-cat">Wok Noodle</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="wok">
+        <div class="dish-media"><img src="images/KanaJaKatkarapuRiisinuudeliWok_Wrap_Roll.jpg" alt="Chicken and Prawn Rice Noodle Wok" loading="lazy"><span class="dish-tag">Wok</span></div>
+        <div class="dish-body">
+          <h3>Chicken &amp; Prawn Noodle Wok</h3>
+          <div class="dish-fi">Kana ja Katkarapu Riisinuudeli Wok</div>
+          <p>A duo of chicken and prawn, wokked hard and fast with rice noodles, vegetables and garlic soy glaze.</p>
+          <div class="dish-foot"><span class="dish-price">16,90&nbsp;€</span><span class="dish-cat">Wok Noodle</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="wok">
+        <div class="dish-media"><img src="images/KasvisCashewpähkinäRiisinuudeliWok_Wrap_Roll.jpg" alt="Vegetable Cashew Rice Noodle Wok" loading="lazy"><span class="dish-tag">Wok</span></div>
+        <div class="dish-body">
+          <h3>Vegetable Cashew Noodle Wok</h3>
+          <div class="dish-fi">Kasvis Cashewpähkinä Riisinuudeli Wok</div>
+          <p>Seasonal vegetables and toasted cashews wok-fried with rice noodles in a light soy and garlic sauce.</p>
+          <div class="dish-foot"><span class="dish-price">15,50&nbsp;€</span><span class="dish-cat">Wok Noodle</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="wok">
+        <div class="dish-media"><img src="images/JättikatkarapuJaKasvisTalonTapaan_Wrap_Roll.jpg" alt="King Prawn and Vegetables House Style" loading="lazy"><span class="dish-tag">House Special</span></div>
+        <div class="dish-body">
+          <h3>King Prawn &amp; Vegetables, House Style</h3>
+          <div class="dish-fi">Jättikatkarapu ja Kasvis Talon Tapaan</div>
+          <p>Our chef's own recipe &mdash; king prawns and seasonal vegetables wokked in a house-made aromatic sauce.</p>
+          <div class="dish-foot"><span class="dish-price">18,50&nbsp;€</span><span class="dish-cat">House Special</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="wok">
+        <div class="dish-media"><img src="images/BasilikaKanaJaKasvis_Wrap_Roll.jpg" alt="Basil Chicken and Vegetables" loading="lazy"><span class="dish-tag">Wok</span></div>
+        <div class="dish-body">
+          <h3>Basil Chicken &amp; Vegetables</h3>
+          <div class="dish-fi">Basilika Kana ja Kasvis</div>
+          <p>Wok-fried chicken and vegetables with fresh Thai basil, garlic and chili in a fragrant soy glaze.</p>
+          <div class="dish-foot"><span class="dish-price">15,90&nbsp;€</span><span class="dish-cat">Wok</span></div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal" data-cat="wok">
+        <div class="dish-media"><img src="images/BasilikaNaudanlihaJaKasvis_Wrap_Roll.jpg" alt="Basil Beef and Vegetables" loading="lazy"><span class="dish-tag">Wok</span></div>
+        <div class="dish-body">
+          <h3>Basil Beef &amp; Vegetables</h3>
+          <div class="dish-fi">Basilika Naudanliha ja Kasvis</div>
+          <p>Tender strips of beef wokked with vegetables, fresh basil and chili &mdash; bold, fast and fragrant.</p>
+          <div class="dish-foot"><span class="dish-price">17,50&nbsp;€</span><span class="dish-cat">Wok</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="ambience" id="ambience">
+  <div class="ambience-grid">
+    <div class="ambience-item tall reveal">
+      <img src="images/table.jpg" alt="Warm restaurant lantern glow" loading="lazy">
+      <div class="ambience-caption">Good Food, Good Vibes</div>
+    </div>
+    <div class="ambience-item reveal">
+      <img src="images/logo.png" alt="Wooden Nordic dining table setting" loading="lazy">
+      
+    </div>
+    
+    <div class="ambience-item reveal">
+      <img src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=1200&auto=format&fit=crop" alt="Steaming broth bowl" loading="lazy">
+      <div class="ambience-caption">Fragrant & Flavorful</div>
+    </div>
+    <div class="ambience-item reveal">
+      <img src="images/herbs.jpg" alt="Fresh herbs and ingredients" loading="lazy">
+      <div class="ambience-caption">Herbs, always fresh</div>
+    </div>
+    <div class="ambience-item reveal">
+      <img src="https://images.unsplash.com/photo-1583224964978-2257b960c3d3?q=80&w=1200&auto=format&fit=crop" alt="Chopsticks and rice bowl detail" loading="lazy">
+      <div class="ambience-caption">Every detail, considered</div>
+    </div>
+  </div>
+</section>
+
+<section class="fusion" id="fusion">
+  <div class="wrap">
+    <div class="fusion-grid">
+      <div class="fusion-visual reveal">
+        <img src="images/hero/Wrap_Roll_Closeup.jpg" alt="Snowy Finnish forest landscape" loading="lazy">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Two Worlds, One Kitchen</span>
+        <h2>Where Hanoi meets<br>the Finnish forest.</h2>
+        <p>Vietnam gave us the recipes: bright herbs, patient broths, the ritual of rolling rice paper by hand. Finland gave us the setting: light birch tables, linen napkins, and a stillness that lets the food speak for itself.</p>
+        <p>We believe good design, like good broth, needs time and restraint. That's why our dining room borrows the calm of a Helsinki winter morning, while every plate carries the colour and spice of a Saigon night market.</p>
+        <div class="fusion-tags">
+          <span class="fusion-tag">🌿 Fresh Herbs Daily</span>
+          <span class="fusion-tag">🕯️ Lantern Lighting</span>
+          <span class="fusion-tag">🪵 Nordic Oak Interiors</span>
+          <span class="fusion-tag">🍜 12-Hour Broths</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="reviews-head reveal">
+      <span class="eyebrow">Guest Voices</span>
+      <h2>Loved across Helsinki.</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p>"The pho broth tastes like it was flown straight from Hanoi. Best bowl I've had outside Vietnam &mdash; and the room is so calm and beautiful."</p>
+        <div class="review-name">Elina Virtanen</div>
+        <div class="review-loc">Helsinki, Finland</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p>"Fresh, fragrant, and beautifully plated. The spring rolls disappear in seconds at our table every single time."</p>
+        <div class="review-name">Minh Tran</div>
+        <div class="review-loc">Espoo, Finland</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p>"A gorgeous mix of two cultures done right. The wok dishes have real fire, and the space feels like a Nordic gallery."</p>
+        <div class="review-name">Juha Korhonen</div>
+        <div class="review-loc">Vantaa, Finland</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="visit-grid">
+      <div class="reveal">
+        <span class="eyebrow">Visit Us</span>
+        <h2>Come warm up<br>with a bowl.</h2>
+        <div class="visit-info">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d99a3d" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div><h4>Address</h4><p>Vuorikatu 14, 00100 Helsinki, Finland</p></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d99a3d" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <div><h4>Opening Hours</h4><p>Mon&ndash;Fri 11:00&ndash;21:00<br>Sat&ndash;Sun 12:00&ndash;22:00</p></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d99a3d" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.98.36 1.94.67 2.86a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.22-1.22a2 2 0 012.11-.45c.92.31 1.88.54 2.86.67A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div><h4>Reservations</h4><p>+358 9 123 4567<br>hello@wrapandroll.fi</p></div>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary" style="margin-top:36px;">Book a Table</a>
+      </div>
+      <div class="map-frame reveal">
+        <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1995.123456789!2d24.945!3d60.1725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNjDCsDEwJzIxLjAiTiAyNMKwNTYnNDIuMCJF!5e0!3m2!1sen!2suk!4v1234567890&hl=en" 
+  width="100%" 
+  height="400" 
+  style="border:0;" 
+  allowfullscreen="" 
+  loading="lazy"
+  &hl="en"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Wrap & Roll</div>
+        <p>Vietnamese street food, rolled and simmered fresh in the heart of Helsinki. Two homelands, one table.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <a href="#story">Our Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#ambience">Ambience</a>
+        <a href="#fusion">Two Worlds</a>
+      </div>
+      <div class="footer-col">
+        <h5>Visit</h5>
+        <a href="#visit">Location</a>
+        <a href="#visit">Opening Hours</a>
+        <a href="#visit">Reservations</a>
+      </div>
+      <div class="footer-col">
+        <h5>Follow</h5>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Wrap & Roll. All rights reserved.</span>
+      <span>Helsinki, Finland</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const dishCards = document.querySelectorAll('.dish-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      dishCards.forEach(card => {
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
